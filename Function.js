@@ -1,0 +1,4 @@
+
+Message = () => {
+    document.write("welcome"); 
+  }
