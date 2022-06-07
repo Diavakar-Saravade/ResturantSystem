@@ -1,10 +1,11 @@
 <html>
     <head>
         <title>Resturant System</title> 
-        <script type = "javascript" src="Function.js"></script>
+        
         <link rel="stylesheet" href="style.css">
         </head>
         <body>
+            <script src="Function.js"></script>
 
             <div class="img">
                 <img src="SetImage.jpg" alt="MainImage" height="740s" width="1500">
@@ -12,13 +13,13 @@
                 <div class="Menu">
                 <form action="/action_page.php">
                     <label for="Hotel1">Choose a Hotel:</label>
-                    <select id="HotelName" name="HotelName">
-                      <option value="PK">PK</option>
-                      <option value="Spice">Spice Factory</option>
-                      <option value="Golden">Golden Bavarchi</option>
-                      <option value="Savli">Savli</option>
+                    <select id="HotelName" name="HotelName" onchange="Message()">
+                      <option value="PK" onclick="Message()">PK</option>
+                      <option value="Spice"  onclick="Message()">Spice Factory</option>
+                      <option value="Golden"  onclick="Message()">Golden Bavarchi</option>
+                      <option value="Savli"  onclick="Message()">Savli</option>
                     </select>
-                    <input type="button" onclick="Message()" value="Show">
+                    <input type="button" value="Show">
                   </form>
                   </div>
         
