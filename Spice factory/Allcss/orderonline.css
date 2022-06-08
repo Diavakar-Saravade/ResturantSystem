@@ -1,0 +1,25 @@
+*{
+    background: #000;
+  }
+body {
+  position: relative;
+}
+ul.nav-pills {
+  top: 20px;
+  position: fixed;
+}
+div.col-sm-9 div {
+  height: 500px;
+  font-size: 15px;
+}
+#section1 {color:#fff; background-color: rgb(7, 7, 7)}
+#section2 {color: #fff; background-color:rgb(7, 7, 7)}
+#section3 {color: #fff; background-color:rgb(7, 7, 7)}
+#section41 {color: #fff; background-color: rgb(7, 7, 7)}
+#section42 {color:#fff; background-color: rgb(7, 7, 7)}
+
+@media screen and (max-width: 810px) {
+  #section1, #section2, #section3, #section41, #section42  {
+    margin-left: 150px;
+  }
+}
