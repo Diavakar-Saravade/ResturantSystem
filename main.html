@@ -8,11 +8,6 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-  
-  <!--<script src="https://www.gstatic.com/firebasejs/9.8.3/firebase-app.js"></script>-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
-  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
   <style>
     body {
       font-family: Arial, Helvetica, sans-serif
@@ -65,7 +60,7 @@
       color: black;
     }
 
-    p {
+    .center-details {
       color: rgb(49, 12, 12);
       font-size: 500%;
       font-family: "Didot", serif;
@@ -78,7 +73,6 @@
     .btn {
       width: 300px;
       position: relative;
-      left: 250px;
       background: rgb(190, 5, 5);
     }
 
@@ -154,30 +148,26 @@
       opacity: 1;
     }
   </style>
-
-  </style>
 </head>
 
 <body>
-  <script src="Function.js"></script>
   <!--
-
-            <div class="img">
-                <img src="SetImage.jpg" alt="MainImage" height="740s" width="1500">
-                
-                <div class="Menu">
-                <form action="/action_page.php">
-                    <label for="Hotel1">Choose a Hotel:</label>
-                    <select id="HotelName" name="HotelName" onchange="Message()">
-                      <option value="PK" onclick="Message()">PK</option>
-                      <option value="Spice"  onclick="Message()">Spice Factory</option>
-                      <option value="Golden"  onclick="Message()">Golden Bavarchi</option>
-                      <option value="Savli"  onclick="Message()">Savli</option>
-                    </select>
-                    <input type="button" value="Show">
-                  </form>
-                </div>
-            -->
+    <div class="img">
+        <img src="SetImage.jpg" alt="MainImage" height="740s" width="1500">
+        
+        <div class="Menu">
+        <form action="/action_page.php">
+            <label for="Hotel1">Choose a Hotel:</label>
+            <select id="HotelName" name="HotelName" onchange="Message()">
+              <option value="PK" onclick="Message()">PK</option>
+              <option value="Spice"  onclick="Message()">Spice Factory</option>
+              <option value="Golden"  onclick="Message()">Golden Bavarchi</option>
+              <option value="Savli"  onclick="Message()">Savli</option>
+            </select>
+            <input type="button" value="Show">
+          </form>
+        </div>
+    -->
 
   <div class="bg-img">
     <div class="container">
@@ -185,21 +175,16 @@
         <a href="#">Home</a>
         <a href="./All.html">Spice Factory</a>
         <!--
-            <a href="#contact">Contact</a>
-      <a href="#about">About</a>
-          
-      -->
-
+          <a href="#contact">Contact</a>
+          <a href="#about">About</a>
+        -->
       </div>
     </div>
+    <div class="center-details">
+      <p>Resturant Details System</p>
+      <button id="login" type="button" class="btn btn-danger" onclick="openForm()">Login</button>
+    </div>
   </div>
-
-  </div>
-
-  <p>Resturant Details System
-  <p>
-    <br>
-    <button id="login" type="button" class="btn btn-danger " onclick="openForm()">Login</button>
   <div class="form-popup" id="myForm">
     <form class="form-container">
       <h1>Login</h1>
@@ -214,11 +199,67 @@
       <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
     </form>
   </div>
+  <br>
 
-  </div>
-  </br>
-
+  <!-- Insert this script at the bottom of the HTML, but before you use any Firebase services -->
   <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.3/firebase-app.js'
+    import { getAuth, createUserWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/9.8.3/firebase-auth.js'
+
+
+
+
+    // TODO: Replace the following with your app's Firebase project configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDfvglCa7eO_65LfxIyOeQel5b2Izdjs9o",
+      authDomain: "restaurantsystem-b01d5.firebaseapp.com",
+      databaseURL: "https://restaurantsystem-b01d5-default-rtdb.firebaseio.com",
+      projectId: "restaurantsystem-b01d5",
+      storageBucket: "restaurantsystem-b01d5.appspot.com",
+      messagingSenderId: "475408154352",
+      appId: "1:475408154352:web:7c5535bb751ccadc5e0c35"
+    };
+
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Initialisiation is over
+
+    // Configuration:
+    document.getElementById('popuplogin').onclick = function () {
+      var email = document.getElementById("email").value;
+      var password = document.getElementById("psw").value;
+      console.log(email);
+      console.log(password);
+
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          alert("User created sucessfully");    // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          alert(errorMessage);
+          // ..
+        });
+    }
+
+    //me
+
+
+    const auth1 = getAuth();
+    signOut(auth).then(() => {
+      // Sign-out successful.
+    }).catch((error) => {
+      // An error happened.
+    })
+
+
+  </script>
+  <!-- <script type="module">
     // Import the functions you need from the SDKs you need
     //import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.3/firebase-app.js";
     //import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.8.3/firebase-auth.js";
@@ -227,8 +268,8 @@
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
 
-     // Your web app's Firebase configuration
-     const firebaseConfig = {
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
       apiKey: "AIzaSyDfvglCa7eO_65LfxIyOeQel5b2Izdjs9o",
       authDomain: "restaurantsystem-b01d5.firebaseapp.com",
       databaseURL: "https://restaurantsystem-b01d5-default-rtdb.firebaseio.com",
@@ -239,8 +280,8 @@
     };
 
     // Initialize the FirebaseUI Widget using Firebase.
-    define('require',function (require) {
-    console.log('inside module');
+    define('require', function (require) {
+      console.log('inside module');
       var firebase = require('firebase');
       var firebaseui = require('firebaseui');
     });
@@ -252,7 +293,7 @@
     // const app = initializeApp(firebaseConfig);
     // const auth = getAuth(app);
 
-    document.getElementById('popuplogin').onclick = function() {
+    document.getElementById('popuplogin').onclick = function () {
       alert('here');
       var email = document.getElementById("email").value;
       var password = document.getElementById("psw").value;
@@ -269,10 +310,9 @@
           alert(errorMessage);
           // ..
         });
-      }
-  </script>
+    }
+  </script> -->
   <script>
-
     function openForm() {
       document.getElementById("myForm").style.display = "block";
     }
@@ -280,9 +320,6 @@
     function closeForm() {
       document.getElementById("myForm").style.display = "none";
     }
-
-
-
   </script>
 </body>
 
