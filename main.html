@@ -147,42 +147,28 @@
     .open-button:hover {
       opacity: 1;
     }
+
+    /* signup*/
   </style>
 </head>
 
 <body>
-  <!--
-    <div class="img">
-        <img src="SetImage.jpg" alt="MainImage" height="740s" width="1500">
-        
-        <div class="Menu">
-        <form action="/action_page.php">
-            <label for="Hotel1">Choose a Hotel:</label>
-            <select id="HotelName" name="HotelName" onchange="Message()">
-              <option value="PK" onclick="Message()">PK</option>
-              <option value="Spice"  onclick="Message()">Spice Factory</option>
-              <option value="Golden"  onclick="Message()">Golden Bavarchi</option>
-              <option value="Savli"  onclick="Message()">Savli</option>
-            </select>
-            <input type="button" value="Show">
-          </form>
-        </div>
-    -->
+
 
   <div class="bg-img">
     <div class="container">
       <div class="topnav">
         <a href="#">Home</a>
         <a href="./All.html">Spice Factory</a>
-        <!--
-          <a href="#contact">Contact</a>
-          <a href="#about">About</a>
-        -->
+
       </div>
     </div>
     <div class="center-details">
       <p>Resturant Details System</p>
       <button id="login" type="button" class="btn btn-danger" onclick="openForm()">Login</button>
+
+      <button id="Signup" type="button" class="btn btn-danger" onclick="SignupForm()">Sign up</button>
+
     </div>
   </div>
   <div class="form-popup" id="myForm">
@@ -195,17 +181,36 @@
       <label for="psw"><b>Password</b></label>
       <input type="password" id="psw" placeholder="Enter Password" name="psw" required>
 
-      <button type="button" id="popuplogin" name="login" class="btn">Login</button>
+      <a href="./All.html"><button type="button" id="popuplogin" name="login" class="btn">Login</button></a>
       <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
     </form>
   </div>
-  <br>
+
+  <div class="form-popup" id="Signup1">
+    <form class="form-container">
+      <h1>Signup</h1>
+
+      <label for="email"><b>Email</b></label>
+      <input type="text" id="SignupEmail" placeholder="Enter Email" name="email" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" id="SignupPassword" placeholder="Enter Password" name="psw" required>
+
+      <label for="psw"><b>Repeat password</b></label>
+      <input type="password" id="RepeatSignPsw" placeholder="Repeat password" name="psw" required>
+      <button type="button" id="SignupBtn" class="btn">signup</button>
+      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    </form>
+  </div>
+
+
+
 
   <!-- Insert this script at the bottom of the HTML, but before you use any Firebase services -->
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.3/firebase-app.js'
     import { getAuth, createUserWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/9.8.3/firebase-auth.js'
-
+    import { signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.8.3/firebase-auth.js'
 
 
 
@@ -233,7 +238,9 @@
       console.log(email);
       console.log(password);
 
-      createUserWithEmailAndPassword(auth, email, password)
+      //for signup me
+
+      signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           // Signed in 
           const user = userCredential.user;
@@ -246,59 +253,27 @@
           // ..
         });
     }
+
+    //const auth1 = getAuth();
+    // signOut(auth).then(() => {
+    //   // Sign-out successful.
+    // }).catch((error) => {
+    //   // An error happened.
+    // })
 
     //me
 
 
-    const auth1 = getAuth();
-    signOut(auth).then(() => {
-      // Sign-out successful.
-    }).catch((error) => {
-      // An error happened.
-    })
+    document.getElementById('SignupBtn').onclick = function () {
+      var signup_E = document.getElementById("SignupEmail").value;
+      var signup_P = document.getElementById("SignupPassword").value;
+      var signup_RP = document.getElementById("RepeatSignPsw").value;
+      console.log(signup_E);
+      console.log(signup_P);
+      console.log(signup_RP);
 
 
-  </script>
-  <!-- <script type="module">
-    // Import the functions you need from the SDKs you need
-    //import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.3/firebase-app.js";
-    //import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.8.3/firebase-auth.js";
-    //import {getDatabase, set, ref, update} from "https://www.gstatic.com/firebasejs/9.8.3/firebase-database.js";
-
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
-
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyDfvglCa7eO_65LfxIyOeQel5b2Izdjs9o",
-      authDomain: "restaurantsystem-b01d5.firebaseapp.com",
-      databaseURL: "https://restaurantsystem-b01d5-default-rtdb.firebaseio.com",
-      projectId: "restaurantsystem-b01d5",
-      storageBucket: "restaurantsystem-b01d5.appspot.com",
-      messagingSenderId: "475408154352",
-      appId: "1:475408154352:web:7c5535bb751ccadc5e0c35"
-    };
-
-    // Initialize the FirebaseUI Widget using Firebase.
-    define('require', function (require) {
-      console.log('inside module');
-      var firebase = require('firebase');
-      var firebaseui = require('firebaseui');
-    });
-    var ui = new firebaseui.auth.AuthUI(firebase.auth());
-
-    console.log('inside module');
-
-    // Initialize Firebase
-    // const app = initializeApp(firebaseConfig);
-    // const auth = getAuth(app);
-
-    document.getElementById('popuplogin').onclick = function () {
-      alert('here');
-      var email = document.getElementById("email").value;
-      var password = document.getElementById("psw").value;
-
-      createUserWithEmailAndPassword(auth, email, password)
+      createUserWithEmailAndPassword(auth, signup_E, signup_P)
         .then((userCredential) => {
           // Signed in 
           const user = userCredential.user;
@@ -311,15 +286,35 @@
           // ..
         });
     }
-  </script> -->
+
+    // const auth2 = getAuth();
+    // signOut(auth).then(() => {
+    //   // Sign-out successful.
+    // }).catch((error) => {
+    //   // An error happened.
+    // })
+
+
+
+
+
+
+  </script>
   <script>
     function openForm() {
       document.getElementById("myForm").style.display = "block";
+
     }
 
     function closeForm() {
       document.getElementById("myForm").style.display = "none";
     }
+
+    function SignupForm() {
+      document.getElementById("Signup1").style.display = "block";
+    }
+
+
   </script>
 </body>
 
