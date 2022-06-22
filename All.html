@@ -233,18 +233,11 @@
   <script type="module">
 
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.3/firebase-app.js'
-    import { getDatabase, ref, set } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.8.3/firebase-database.min.js";
+    import { getDatabase, ref, set, child, onValue, get } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.8.3/firebase-database.min.js";
     //import { getDatabase } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.8.3/firebase-database.min.js";
 
 
-    function writeUserData(userId, name, email, imageUrl) {
-      const db = getDatabase();
-      set(ref(db, 'users/' + userId), {
-        username: name,
-        email: email,
-        profile_picture: imageUrl
-      });
-    }
+
 
     // TODO: Replace the following with your app's Firebase project configuration
     const firebaseConfig = {
@@ -274,7 +267,7 @@
       console.log(Date_time);
       console.log(Message);
 
-
+      writeUserData(Name, How_many_peoples, Date_time, Message);
 
       // firebase.database().ref('reserve_a_table/' + table).set({
       //   Cust_name: Name,
@@ -283,16 +276,46 @@
       //   Any_Message: Message,
       // });
 
-      function writeUserData(userId, name, email, imageUrl) {
-        const db = getDatabase();
-        set(ref(db, 'users/' + userId), {
-          username: name,
-          email: email,
-          profile_picture: imageUrl
-        });
-      }
 
     }
+
+
+    function writeUserData(Name, How_many_peoples, Date_time, Message) {
+      const db = getDatabase();
+      set(ref(db), {
+        Customer_name: Name,
+        No_of_peoples: How_many_peoples,
+        Date_Time: Date_time,
+        Cust_message: Message,
+        //'users/' + userId
+      });
+      console.log(Customer_name);
+      console.log(No_of_peoples);
+      console.log(Date_Time);
+      console.log(Cust_message);
+
+    }
+
+    //post id
+    // const db = getDatabase();
+
+    // const starCountRef = ref(db, 'posts/' + postId + '/starCount');
+    // onValue(starCountRef, (snapshot) => {
+    //   const data = snapshot.val();
+    //   updateStarCount(postElement, data);
+    // });
+
+    const dbRef = ref(getDatabase());
+    get(child(dbRef, `users/${userId}`)).then((snapshot) => {
+      if (snapshot.exists()) {
+        console.log(snapshot.val());
+      } else {
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+
 
 
 
