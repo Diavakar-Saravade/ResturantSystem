@@ -13,6 +13,7 @@
 
 <body>
 
+
   <!-- Navbar (sit on top) -->
   <div class="w3-top w3-hide-small">
     <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="myNavbar">
@@ -184,23 +185,7 @@
         class="w3-hover-text-green">Spice factory</a></p>
   </footer>
 
-  <script>
-    // Tabbed Menu
-    function openMenu(evt, menuName) {
-      var i, x, tablinks;
-      x = document.getElementsByClassName("menu");
-      for (i = 0; i < x.length; i++) {
-        x[i].style.display = "none";
-      }
-      tablinks = document.getElementsByClassName("tablink");
-      for (i = 0; i < x.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
-      }
-      document.getElementById(menuName).style.display = "block";
-      evt.currentTarget.firstElementChild.className += " w3-red";
-    }
-    document.getElementById("myLink").click();
-  </script>
+  <script src="all.js"></script>
 
   <script type="module">
 
@@ -232,6 +217,7 @@
     }
 
     var userID = 1;
+    //fetch value from local storage if available else save as 1
     function writeUserData(Name, How_many_peoples, Date_time, Message) {
       //const db = getDatabase();
       set(ref(database, 'users/' + userID), {
@@ -240,8 +226,11 @@
         Date_Time: Date_time,
         Cust_message: Message,
       });
+      userID++;
+      //local storage must save incermented value
     }
-    userID++;
+
+
     //post id
     // const db = getDatabase();
 
@@ -251,10 +240,10 @@
     //   updateStarCount(postElement, data);
     // });
 
-    var userid = 1;
+    var userid_1 = 1;
     function read() {
-      //const dbRef = ref(getDatabase());
-      get(child(database, `users/${userid}`)).then((snapshot) => {
+      const dbRef = ref(getDatabase());
+      get(child(dbRef, `users/${userid_1}`)).then((snapshot) => {
         if (snapshot.exists()) {
           console.log(snapshot.val());
         } else {
@@ -263,9 +252,9 @@
       }).catch((error) => {
         console.error(error);
       });
+      userid_1++;
     }
-    userid++;
-    //read();
+    read();
 
   </script>
 </body>
