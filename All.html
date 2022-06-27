@@ -240,22 +240,29 @@
     }
 
 
-    var userid_1 = 1;
+
     function read() {
       const dbRef = ref(getDatabase());
-      get(child(dbRef, `users/${userid_1}`)).then((snapshot) => {
-        if (snapshot.exists()) {
-          console.log(snapshot.val(userID));
+      get(child(dbRef, `users`)).then((snapshot) => {
+        if (snapshot.exists(userID)) {
+          console.log(snapshot.val());
         } else {
-          console.log("No data available");
+          console.log("data not found");
         }
       }).catch((error) => {
         console.error(error);
       });
-      userid_1++;
     }
     read();
 
+    // function descending() {
+    //   const desc = ["userID"];
+    //   desc.sort(userID);
+    //   desc.reverse(userID);
+    //   console.log(desc);
+    // }
+
+    // descending();
   </script>
 </body>
 
