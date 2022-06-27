@@ -216,7 +216,14 @@
       writeUserData(Name, How_many_peoples, Date_time, Message);
     }
 
-    var userID = 1;
+    var userID;
+    if (localStorage.getItem("userID") !== null) {
+      userID = localStorage.getItem("userID");
+    } else {
+      userID = 1;
+      localStorage.setItem("userID", userID);
+    }
+
     //fetch value from local storage if available else save as 1
     function writeUserData(Name, How_many_peoples, Date_time, Message) {
       //const db = getDatabase();
@@ -227,25 +234,18 @@
         Cust_message: Message,
       });
       userID++;
+      localStorage.setItem("userID", userID);
+
       //local storage must save incermented value
     }
 
-
-    //post id
-    // const db = getDatabase();
-
-    // const starCountRef = ref(db, 'posts/' + postId + '/starCount');
-    // onValue(starCountRef, (snapshot) => {
-    //   const data = snapshot.val();
-    //   updateStarCount(postElement, data);
-    // });
 
     var userid_1 = 1;
     function read() {
       const dbRef = ref(getDatabase());
       get(child(dbRef, `users/${userid_1}`)).then((snapshot) => {
         if (snapshot.exists()) {
-          console.log(snapshot.val());
+          console.log(snapshot.val(userID));
         } else {
           console.log("No data available");
         }
