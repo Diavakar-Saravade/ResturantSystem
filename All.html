@@ -235,19 +235,23 @@
       });
       userID++;
       localStorage.setItem("userID", userID);
-
-      //local storage must save incermented value
     }
-
-
 
     function read() {
       const dbRef = ref(getDatabase());
       get(child(dbRef, `users`)).then((snapshot) => {
-        if (snapshot.exists(userID)) {
+        if (snapshot.exists()) {
           console.log(snapshot.val());
+          var j = 0;
+          var res = [];
+          for (var i in snapshot.val()) {
+            res[j] = snapshot.val()[i];
+            res[j].userId = i;
+            j++;
+          }
+          reverse(res);
         } else {
-          console.log("data not found");
+          console.log("No data available");
         }
       }).catch((error) => {
         console.error(error);
@@ -255,14 +259,13 @@
     }
     read();
 
-    // function descending() {
-    //   const desc = ["userID"];
-    //   desc.sort(userID);
-    //   desc.reverse(userID);
-    //   console.log(desc);
-    // }
-
-    // descending();
+    function reverse(res) {
+      var rev = [];
+      for (var j = res.length - 1; j >= 0; j--) {
+        rev.push(res[j]);
+      }
+      console.log(rev);
+    }
   </script>
 </body>
 
