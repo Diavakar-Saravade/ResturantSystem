@@ -13,16 +13,9 @@
 
 <body>
     <script src="admin.js"></script>
-
-
-
     <div id="mySidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeSidebar()">&times;</a>
         <a href="#">Admin</a>
-
-        <!-- <a href="#">Services</a>
-        <a href="#">Clients</a>
-        <a href="#">Contact</a> -->
     </div>
 
     <div id="main">
@@ -40,101 +33,85 @@
                     </tr>
                 </thead>
                 <tbody id="Tbody1"></tbody>
-                <!-- <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Clark</td>
-                        <td>Kent</td>
-                        <td>clarkkent@mail.com</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Peter</td>
-                        <td>Parker</td>
-                        <td>peterparker@mail.com</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>John</td>
-                        <td>Carter</td>
-                        <td>johncarter@mail.com</td>
-                    </tr>
-                </tbody> -->
+
             </table>
         </div>
-        <script type="module">
-            var userid = 0;
-            var tbody = document.getElementById('Tbody1');
+    </div>
 
-            function AddItemToTable(cust_name, Cust_msg, date, no_peoples) {
-                let trow = document.createElement("trow");
-                let td1 = document.createElement('td');
-                let td2 = document.createElement('td');
-                let td3 = document.createElement('td');
-                let td4 = document.createElement('td');
-                let td5 = document.createElement('td');
+    <script type="module">
+        var userID = 0;
 
-                td1.innerHTML = ++userid;
-                td2.innerHTML = cust_name;
-                td3.innerHTML = date;
-                td4.innerHTML = Cust_msg;
-                td5.innerHTML = no_peoples;
+        var tbody = document.getElementById('Tbody1');
 
-                trow.appendChild(td1);
-                trow.appendChild(td2);
-                trow.appendChild(td3);
-                trow.appendChild(td4);
-                trow.appendChild(td5);
+        function AddItemToTable(cust_name, Cust_msg, date, no_peoples) {
+            let trow = document.createElement("tr");
+            let td1 = document.createElement('td');
+            let td2 = document.createElement('td');
+            let td3 = document.createElement('td');
+            let td4 = document.createElement('td');
+            let td5 = document.createElement('td');
 
-                tbody.appendChild(trow);
-            }
+            td1.innerHTML = userID;
+            td2.innerHTML = cust_name;
+            td3.innerHTML = date;
+            td4.innerHTML = Cust_msg;
+            td5.innerHTML = no_peoples;
 
-            function AddAllItemsToTable(user1) {
-                userid = 0;
-                tbody.innerHTML = "";
-                user1.forEach(element => {
-                    AddItemToTable(element.Customer_name, element.Date_Time, element.Cust_message, element.No_of_peoples)
-                });
-            }
+            trow.appendChild(td1);
+            trow.appendChild(td2);
+            trow.appendChild(td3);
+            trow.appendChild(td4);
+            trow.appendChild(td5);
 
-            import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.3/firebase-app.js'
-            import { getDatabase, ref, set, child, onValue, get } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.8.3/firebase-database.min.js";
+            tbody.appendChild(trow);
 
-            // TODO: Replace the following with your app's Firebase project configuration
-            const firebaseConfig = {
-                apiKey: "AIzaSyDfvglCa7eO_65LfxIyOeQel5b2Izdjs9o",
-                authDomain: "restaurantsystem-b01d5.firebaseapp.com",
-                databaseURL: "https://restaurantsystem-b01d5-default-rtdb.firebaseio.com",
-                projectId: "restaurantsystem-b01d5",
-                storageBucket: "restaurantsystem-b01d5.appspot.com",
-                messagingSenderId: "475408154352",
-                appId: "1:475408154352:web:7c5535bb751ccadc5e0c35"
-            };
+        }
 
-            // Initialize Firebase
-            const app = initializeApp(firebaseConfig);
+        function AddAllItemsToTable(user1) {
+            //  userid = 0;
+            tbody.innerHTML = "";
+            user1.forEach(element => {
+                AddItemToTable(element.Customer_name, element.Date_Time, element.Cust_message, element.No_of_peoples)
+            });
+        }
 
 
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.3/firebase-app.js'
+        import { getDatabase, ref, set, child, onValue, get } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.8.3/firebase-database.min.js";
 
-            function GetAllDataOnce() {
-                const dbRef = ref(getDatabase());
-                get(child(dbRef, `users`)).then((snapshot) => {
+        // TODO: Replace the following with your app's Firebase project configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDfvglCa7eO_65LfxIyOeQel5b2Izdjs9o",
+            authDomain: "restaurantsystem-b01d5.firebaseapp.com",
+            databaseURL: "https://restaurantsystem-b01d5-default-rtdb.firebaseio.com",
+            projectId: "restaurantsystem-b01d5",
+            storageBucket: "restaurantsystem-b01d5.appspot.com",
+            messagingSenderId: "475408154352",
+            appId: "1:475408154352:web:7c5535bb751ccadc5e0c35"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+
+
+        function GetAllDataOnce() {
+            const dbRef = ref(getDatabase());
+            get(child(dbRef, `users`)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    console.log(snapshot.val());
                     var user = [];
                     snapshot.forEach(childSnapshot => {
                         user.push(childSnapshot.val());
                     });
                     AddAllItemsToTable(user);
+                    console.log(user);
+                }
+            });
+        }
+        window.onload = GetAllDataOnce;
 
-                });
-            }
-            window.onload = GetAllDataOnce;
-
-
-
-
-
-
-        </Script>
+    </Script>
 
 </body>
 
