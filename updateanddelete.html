@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+
+    <h2>Resuaturant System</h2>
+
+    <form action="/action_page.php">
+        <label for="USERID">user id :</label><br>
+        <input type="text" id="USERID" name="fname" value=""><br>
+        <label for="CUSTname">Customer name:</label><br>
+        <input type="text" id="CUSTname" name="lname" value=""><br><br>
+        <label for="CUSTmsg">customer message:</label><br>
+        <input type="text" id="CUSTmsg" name="lname" value=""><br><br>
+        <label for="DATEandTIME">Date and time :</label><br>
+        <input type="text" id="DATEandTIME" name="lname" value=""><br><br>
+        <label for="NOofPEOPLES">Number of peoples:</label><br>
+        <input type="text" id="NOofPEOPLES" name="lname" value=""><br><br>
+        <input type="button" value="update" id="Updating">
+    </form>
+
+
+    <script type="module">
+
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.3/firebase-app.js'
+        import { getDatabase, ref, set, child, onValue, get, push, update } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.8.3/firebase-database.min.js";
+
+
+        // TODO: Replace the following with your app's Firebase project configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDfvglCa7eO_65LfxIyOeQel5b2Izdjs9o",
+            authDomain: "restaurantsystem-b01d5.firebaseapp.com",
+            databaseURL: "https://restaurantsystem-b01d5-default-rtdb.firebaseio.com",
+            projectId: "restaurantsystem-b01d5",
+            storageBucket: "restaurantsystem-b01d5.appspot.com",
+            messagingSenderId: "475408154352",
+            appId: "1:475408154352:web:7c5535bb751ccadc5e0c35"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+
+        function writeNewPost(userId, Customer_name, Date_Time, Cust_message, No_of_peoples) {
+            const db = getDatabase();
+            // A post entry.
+            const postData = {
+                uid: userId,
+                Customer_name: Customer_name,
+                Date_Time: Date_Time,
+                Cust_message: Cust_message,
+                No_of_peoples: No_of_peoples,
+            };
+
+            // Get a key for a new Post.
+            // const newPostKey = push(child(ref(db), 'users')).key;
+
+            // Write the new post's data simultaneously in the posts list and the user's post list.
+            const updates = {};
+            // updates['/users/' + newPostKey] = postData;
+            //updates['/users/' + userId + '/' + newPostKey] = postData;
+            updates['/users/' + userId] = postData;
+
+            return update(ref(db), updates);
+        }
+
+        document.getElementById('Updating').onclick = function () {
+            var userId = document.getElementById("USERID").value;
+            var Customer_name = document.getElementById('CUSTname').value;
+            var Date_Time = document.getElementById('DATEandTIME').value;
+            var Cust_message = document.getElementById('CUSTmsg').value;
+            var No_of_peoples = document.getElementById('NOofPEOPLES').value;
+            writeNewPost(userId, Customer_name, Date_Time, Cust_message, No_of_peoples);
+        }
+    </script>
+
+</body>
+
+</html>

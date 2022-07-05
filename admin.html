@@ -30,6 +30,7 @@
                         <th>Customer message </th>
                         <th>Date and Time</th>
                         <th>No of peoples</th>
+                        <th> Update and delete</th>
                     </tr>
                 </thead>
                 <tbody id="Tbody1"></tbody>
@@ -39,45 +40,49 @@
     </div>
 
     <script type="module">
-        var userID = 0;
 
         var tbody = document.getElementById('Tbody1');
 
-        function AddItemToTable(cust_name, Cust_msg, date, no_peoples) {
+        function AddItemToTable(cust_name, Cust_msg, date, no_peoples, userId) {
             let trow = document.createElement("tr");
             let td1 = document.createElement('td');
             let td2 = document.createElement('td');
             let td3 = document.createElement('td');
             let td4 = document.createElement('td');
             let td5 = document.createElement('td');
+            let td6 = document.createElement('td');
+            let bt1 = document.createElement('button');
 
-            td1.innerHTML = userID;
+            td1.innerHTML = userId;
             td2.innerHTML = cust_name;
             td3.innerHTML = date;
             td4.innerHTML = Cust_msg;
             td5.innerHTML = no_peoples;
+            td6.innerHTML = '<a href="./updateanddelete.html"><button type="button" id="Update">Update</button></a><a href="./updateanddelete.html"><button type="button" id="Update">Delete</button></a>';
+
 
             trow.appendChild(td1);
             trow.appendChild(td2);
             trow.appendChild(td3);
             trow.appendChild(td4);
             trow.appendChild(td5);
+            trow.appendChild(td6);
 
             tbody.appendChild(trow);
 
         }
 
+
+
         function AddAllItemsToTable(user1) {
-            //  userid = 0;
+
             tbody.innerHTML = "";
             user1.forEach(element => {
-                AddItemToTable(element.Customer_name, element.Date_Time, element.Cust_message, element.No_of_peoples)
+                AddItemToTable(element.Customer_name, element.Date_Time, element.Cust_message, element.No_of_peoples, element.userId)
             });
         }
-
-
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.3/firebase-app.js'
-        import { getDatabase, ref, set, child, onValue, get } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.8.3/firebase-database.min.js";
+        import { getDatabase, ref, set, child, onValue, get, push, update } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.8.3/firebase-database.min.js";
 
         // TODO: Replace the following with your app's Firebase project configuration
         const firebaseConfig = {
@@ -93,24 +98,25 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
 
-
-
         function GetAllDataOnce() {
             const dbRef = ref(getDatabase());
             get(child(dbRef, `users`)).then((snapshot) => {
                 if (snapshot.exists()) {
                     console.log(snapshot.val());
                     var user = [];
-                    snapshot.forEach(childSnapshot => {
-                        user.push(childSnapshot.val());
-                    });
-                    AddAllItemsToTable(user);
-                    console.log(user);
+
+                    var j = 0;
+                    var res = [];
+                    for (var i in snapshot.val()) {
+                        res[j] = snapshot.val()[i];
+                        res[j].userId = i;
+                        j++;
+                    }
+                    AddAllItemsToTable(res);
                 }
             });
         }
         window.onload = GetAllDataOnce;
-
     </Script>
 
 </body>
