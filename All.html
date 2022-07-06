@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Spice factory page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
+  <link rel="stylesheet" href="all.css">
+
+</head>
+
+<body>
+
+
+  <!-- Navbar (sit on top) -->
+  <div class="w3-top w3-hide-small">
+    <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="myNavbar">
+      <a href="./main.html" class="w3-bar-item w3-button">HOME</a>
+      <a href="#menu" class="w3-bar-item w3-button">MENU</a>
+      <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+      <a href="#myMap" class="w3-bar-item w3-button">CONTACT</a>
+      <a href="./main.html" class="w3-bar-item w3-button">signout</a>
+    </div>
+  </div>
+
+  <!-- Header with image -->
+  <header class="bgimg w3-display-container w3-grayscale-min" id="home">
+    <div class="w3-display-bottomleft w3-padding">
+      <span class="w3-tag w3-xlarge">Open from 10am to 12pm</span>
+    </div>
+    <div class="w3-display-middle w3-center">
+      <span class="w3-text-black w3-hide-small" style="font-size:100px; position: relative;right: 160px;">Click
+        Below<br></span>
+      <p><a href="#menu" class="w3-button w3-xxlarge w3-black" style="position: relative; right: 120px;">Let me see the
+          menu</a></p>
+    </div>
+  </header>
+
+  <!-- Menu Container -->
+  <div class="w3-container w3-black w3-padding-64 w3-xxlarge" id="menu">
+    <div class="w3-content">
+
+      <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">THE MENU</h1>
+      <div class="w3-row w3-center w3-border w3-border-dark-grey">
+        <a href="javascript:void(0)" onclick="openMenu(event, 'Recommended');" id="myLink">
+          <div class="w3-col s4 tablink w3-padding-large w3-hover-red" style="overflow: auto;">Recommended</div>
+        </a>
+        <a href="javascript:void(0)" onclick="openMenu(event, 'Special');">
+          <div class="w3-col s4 tablink w3-padding-large w3-hover-red" style="overflow: auto;">Special</div>
+        </a>
+        <a href="javascript:void(0)" onclick="openMenu(event, 'Nonveg');">
+          <div class="w3-col s4 tablink w3-padding-large w3-hover-red" style="overflow: auto;">Nonveg</div>
+        </a>
+      </div>
+
+      <div id="Recommended" class="w3-container menu w3-padding-32 w3-white">
+        <h1><b>Paneer masala</b> <span class="w3-right w3-tag w3-dark-grey w3-round">RS.250</span></h1>
+        <p class="w3-text-grey">Soft paneer cubes cooked in masala pan</p>
+        <hr>
+
+        <h1><b>Dal makhani</b> <span class="w3-right w3-tag w3-dark-grey w3-round">RS.300</span></h1>
+        <p class="w3-text-grey">Fried Dal in pan</p>
+        <hr>
+
+        <h1><b>Veg kadhai</b> <span class="w3-right w3-tag w3-dark-grey w3-round">RS.270</span></h1>
+        <p class="w3-text-grey">Stuffed vegetables in a hot pan </p>
+        <hr>
+
+        <h1><b>Butter Paneer</b> <span class="w3-right w3-tag w3-dark-grey w3-round">RS.350</span></h1>
+        <p class="w3-text-grey">Sweet to taste</p>
+        <hr>
+
+        <h1><b>Paneer maratha </b> <span class="w3-tag w3-red w3-round">Hot!</span><span
+            class="w3-right w3-tag w3-dark-grey w3-round">RS.200.00</span></h1>
+        <p class="w3-text-grey">Spicy paneer</p>
+        <hr>
+
+        <h1><b>Veg handi</b> <span class="w3-tag w3-grey w3-round">New</span><span
+            class="w3-right w3-tag w3-dark-grey w3-round">RS.210</span></h1>
+        <p class="w3-text-grey">Fresh tomatoes, mozzarella, parma, bacon, fresh arugula</p>
+      </div>
+
+      <div id="Special" class="w3-container menu w3-padding-32 w3-white">
+        <h1><b>Murg mussalam</b> <span class="w3-tag w3-grey w3-round">Popular</span> <span
+            class="w3-right w3-tag w3-dark-grey w3-round">RS.400</span></h1>
+        <p class="w3-text-grey">Chicken grevy</p>
+        <hr>
+
+        <h1><b>Kashmiri veg kadhai</b> <span class="w3-right w3-tag w3-dark-grey w3-round">RS.140</span></h1>
+        <p class="w3-text-grey">cooked veg in kadhai spicy to taste</p>
+        <hr>
+
+        <h1><b>KAshmiri dum aloo</b> <span class="w3-right w3-tag w3-dark-grey w3-round">RS.110</span></h1>
+        <p class="w3-text-grey">Potatos Stuffed</p>
+        <hr>
+
+        <h1><b>The classic paneer</b> <span class="w3-right w3-tag w3-dark-grey w3-round">RS.250</span></h1>
+        <p class="w3-text-grey">middum Spicy</p>
+      </div>
+
+
+      <div id="Nonveg" class="w3-container menu w3-padding-32 w3-white">
+        <h1><b>Chicken Kheema</b> <span class="w3-tag w3-grey w3-round">Speciality</span><span
+            class="w3-right w3-tag w3-dark-grey w3-round">RS.500</span></h1>
+        <p class="w3-text-grey">Non veg Special</p>
+        <hr>
+
+        <h1><b>Chicken grilled sandwich</b> <span class="w3-right w3-tag w3-dark-grey w3-round">RS.250</span></h1>
+        <p class="w3-text-grey">Bread and Chicken grilled</p>
+        <hr>
+
+        <h1><b>Chicken Biryani</b> <span class="w3-right w3-tag w3-dark-grey w3-round">RS.250</span></h1>
+        <p class="w3-text-grey">Special in non veg </p>
+        <hr>
+
+        <h1><b>Chicken tawa</b> <span class="w3-right w3-tag w3-dark-grey w3-round">RS.220</span></h1>
+        <p class="w3-text-grey">Chicken cooked in a pan</p>
+      </div><br>
+
+    </div>
+  </div>
+
+  <!-- About Container -->
+  <div class="w3-container w3-padding-64 w3-red w3-grayscale w3-xlarge" id="about">
+    <div class="w3-content">
+      <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">About</h1>
+      <h3>RELATED TO SPICE FACTORY, HINJAWADI</h3>
+      <p>Restaurants in White Square, Hinjawadi, Restaurants in Pune, Pune Restaurants, Hinjawadi restaurants, Best
+        Hinjawadi restaurants, Pimpri Chinchwad Area restaurants, Pub in Pune, Pub near me, Pub in Hinjawadi, Casual
+        Dining in Pune, Casual Dining near me, Casual Dining in Hinjawadi, in Pune, near me, in Hinjawadi, Order food
+        online in Hinjawadi, Order food online in Pune, New Year Parties in Pune, Christmas' Special in Pune.</p>
+      <h3>RESTAURANTS AROUND HINJAWADI</h3>
+      <p>Expressway restaurants, Mahalunge restaurants, Wakad restaurants, Dange Chowk restaurants</p>
+      <h3>FREQUENT SEARCHES LEADING TO THIS PAGE</h3>
+      <p>spice factory hinjawadi, spice factory, spice factory hinjewadi, spice factory pune maharashtra, spice factory
+        menu</p>
+      <h1><b>Opening Hours</b></h1>
+
+      <div class="w3-row">
+        <div class="w3-col s6">
+          <p>Mon & Tue CLOSED</p>
+          <p>Wednesday 10.00 - 24.00</p>
+          <p>Thursday 10:00 - 24:00</p>
+        </div>
+        <div class="w3-col s6">
+          <p>Friday 10:00 - 12:00</p>
+          <p>Saturday 10:00 - 23:00</p>
+          <p>Sunday Closed</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Image of location/map -->
+  <img src="/w3images/map.jpg" class="w3-image w3-greyscale" style="width:100%;" id="myMap">
+
+  <!-- Contact -->
+  <div class="w3-container w3-padding-64 w3-blue-grey w3-grayscale-min w3-xlarge">
+    <div class="w3-content">
+      <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">Contact</h1>
+      <p>Find us at some address at some place or call us at 020-445756</p>
+      <p><span class="w3-tag"></span> We offer full-service catering for any event, large or small. We understand your
+        needs and we will cater the food to satisfy the biggerst criteria of them all, both look and taste.</p>
+      <p class="w3-xxlarge"><strong>Reserve</strong> a table, ask for today's special or just send us a message:</p>
+      <form action="/action_page.php" target="_blank">
+        <p><input class="w3-input w3-padding-16 w3-border" type="text" id="Name" placeholder="Name" required
+            name="Name"></p>
+        <p><input class="w3-input w3-padding-16 w3-border" type="number" id="Peoples" placeholder="How many people"
+            required name="People"></p>
+        <p><input class="w3-input w3-padding-16 w3-border" type="datetime-local" id="Date" placeholder="Date and time"
+            required name="date" value="2020-11-16T20:00"></p>
+        <p><input class="w3-input w3-padding-16 w3-border" type="text" id="Message"
+            placeholder="Message \ Special requirements" required name="Message"></p>
+        <p><button class="w3-button w3-light-grey w3-block" id="submit1" type="button">SEND MESSAGE</button></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="w3-center w3-black w3-padding-48 w3-xxlarge">
+    <p>Powered by <a href="https://www.zomato.com/pune/spice-factory-hinjawadi/book" title="W3.CSS" target="_blank"
+        class="w3-hover-text-green">Spice factory</a></p>
+  </footer>
+
+  <script src="all.js"></script>
+
+  <script type="module">
+
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.8.3/firebase-app.js'
+    import { getDatabase, ref, set, child, onValue, get } from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.8.3/firebase-database.min.js";
+
+    // TODO: Replace the following with your app's Firebase project configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDfvglCa7eO_65LfxIyOeQel5b2Izdjs9o",
+      authDomain: "restaurantsystem-b01d5.firebaseapp.com",
+      databaseURL: "https://restaurantsystem-b01d5-default-rtdb.firebaseio.com",
+      projectId: "restaurantsystem-b01d5",
+      storageBucket: "restaurantsystem-b01d5.appspot.com",
+      messagingSenderId: "475408154352",
+      appId: "1:475408154352:web:7c5535bb751ccadc5e0c35"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    // Initialize Realtime Database and get a reference to the service
+    const database = getDatabase(app);
+    document.getElementById('submit1').onclick = function () {
+      var Name = document.getElementById("Name").value;
+      var How_many_peoples = document.getElementById('Peoples').value;
+      var Date_time = document.getElementById('Date').value;
+      var Message = document.getElementById('Message').value;
+      writeUserData(Name, How_many_peoples, Date_time, Message);
+    }
+
+    var userID;
+    if (localStorage.getItem("userID") !== null) {
+      userID = localStorage.getItem("userID");
+    } else {
+      userID = 1;
+      localStorage.setItem("userID", userID);
+    }
+
+    //fetch value from local storage if available else save as 1
+    function writeUserData(Name, How_many_peoples, Date_time, Message) {
+      //const db = getDatabase();
+      set(ref(database, 'users/' + userID), {
+        Customer_name: Name,
+        No_of_peoples: How_many_peoples,
+        Date_Time: Date_time,
+        Cust_message: Message,
+      });
+      userID++;
+      localStorage.setItem("userID", userID);
+    }
+
+    function read() {
+      const dbRef = ref(getDatabase());
+      get(child(dbRef, `users`)).then((snapshot) => {
+        if (snapshot.exists()) {
+          console.log(snapshot.val());
+          var j = 0;
+          var res = [];
+          for (var i in snapshot.val()) {
+            res[j] = snapshot.val()[i];
+            res[j].userId = i;
+            j++;
+          }
+          reverse(res);
+        } else {
+          console.log("No data available");
+        }
+      }).catch((error) => {
+        console.error(error);
+      });
+    }
+    read();
+
+    function reverse(res) {
+      var rev = [];
+      for (var j = res.length - 1; j >= 0; j--) {
+        rev.push(res[j]);
+      }
+      console.log(rev);
+    }
+  </script>
+</body>
+
+</html>
