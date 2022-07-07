@@ -48,24 +48,6 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
 
-
-        function writeNewPost(userId, Customer_name, Date_Time, Cust_message, No_of_peoples) {
-            const db = getDatabase();
-            // A post entry.
-            const postData = {
-                uid: userId,
-                Customer_name: Customer_name,
-                Date_Time: Date_Time,
-                Cust_message: Cust_message,
-                No_of_peoples: No_of_peoples,
-            };
-            const updates = {};
-
-            updates['/users/' + userId] = postData;
-
-            return update(ref(db), updates);
-        }
-
         document.getElementById('Updating').onclick = function () {
             var userId = document.getElementById("USERID").value;
             var Customer_name = document.getElementById('CUSTname').value;
@@ -80,12 +62,28 @@
             DeleteUser(userId);
         }
 
+        const db = getDatabase();
+
         function DeleteUser(userId) {
-            const db = getDatabase();
-            remove(ref(db), 'users' + userId);
-            //set(ref(db), '/users/' + userId, null);
+            // set(ref(db, 'users/' + userId), null);
+            remove(ref(db, 'users/' + userId), null);
         }
 
+        function writeNewPost(userId, Customer_name, Date_Time, Cust_message, No_of_peoples) {
+            // A post entry.
+            const postData = {
+                uid: userId,
+                Customer_name: Customer_name,
+                Date_Time: Date_Time,
+                Cust_message: Cust_message,
+                No_of_peoples: No_of_peoples,
+            };
+            const updates = {};
+
+            updates['/users/' + userId] = postData;
+
+            return update(ref(db), updates);
+        }
     </script>
 
 </body>
