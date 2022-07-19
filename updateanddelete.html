@@ -24,7 +24,6 @@
         <input type="text" id="NOofPEOPLES" name="lname" value=""><br><br>
         <input type="button" value="update" id="Updating">
         <input type="button" value="Delete" id="Deleting">
-
     </form>
 
 
@@ -67,6 +66,8 @@
         function DeleteUser(userId) {
             // set(ref(db, 'users/' + userId), null);
             remove(ref(db, 'users/' + userId), null);
+            // update(ref(db, 'users/' + userId), null);
+
         }
 
         function writeNewPost(userId, Customer_name, Date_Time, Cust_message, No_of_peoples) {
@@ -77,6 +78,8 @@
                 Date_Time: Date_Time,
                 Cust_message: Cust_message,
                 No_of_peoples: No_of_peoples,
+                review: "My review",
+
             };
             const updates = {};
 
@@ -84,6 +87,16 @@
 
             return update(ref(db), updates);
         }
+
+        function review(userId) {
+            var updates = {};
+
+            updates['/users/' + userId + '/review'] = "My Review1";
+
+            return update(ref(db), updates);
+
+        }
+        review(50);
     </script>
 
 </body>
