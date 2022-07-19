@@ -39,6 +39,33 @@
         </div>
     </div>
 
+    <form style="display: none" id="UpdateForm" name="UpdateForm">
+        <label for="USERID">user id :</label><br>
+        <input type="text" id="USERID" name="fname" value=""><br>
+        <label for="CUSTname">Customer name:</label><br>
+        <input type="text" id="CUSTname" name="cName" value=""><br><br>
+        <label for="CUSTmsg">customer message:</label><br>
+        <input type="text" id="CUSTmsg" name="lname" value=""><br><br>
+        <label for="DATEandTIME">Date and time :</label><br>
+        <input type="text" id="DATEandTIME" name="lname" value=""><br><br>
+        <label for="NOofPEOPLES">Number of peoples:</label><br>
+        <input type="text" id="NOofPEOPLES" name="lname" value=""><br><br>
+        <input type="button" value="update" id="Updating">
+        <input type="button" value="Delete" id="Deleting">
+    </form>
+    <script>
+
+        function Openpopup(userId, cust_name, date, Cust_msg, no_peoples) {
+            document.getElementById("UpdateForm").style.display = "block";
+            document.getElementById("USERID").value = userId;
+            document.getElementById("CUSTname").value = cust_name;
+            document.getElementById("DATEandTIME").value = date;
+            document.getElementById("CUSTmsg").value = Cust_msg;
+            document.getElementById("NOofPEOPLES").value = no_peoples;
+        }   
+    </script>
+
+
     <script type="module">
 
         var tbody = document.getElementById('Tbody1');
@@ -58,8 +85,7 @@
             td3.innerHTML = date;
             td4.innerHTML = Cust_msg;
             td5.innerHTML = no_peoples;
-            td6.innerHTML = '<a href="./updateanddelete.html"><button type="button" id="Update">Update</button></a><a href="./updateanddelete.html"><button type="button" id="Update">Delete</button></a>';
-
+            td6.innerHTML = '<button type="button" id="UpdateDemo" onclick="Openpopup(\'' + userId + '\',\'' + cust_name + '\',\'' + Cust_msg + '\',\'' + date + '\',\'' + no_peoples + '\')">Update</button></a><a href="./updateanddelete.html"><button type="button" id="Update">Delete</button></a>';
 
             trow.appendChild(td1);
             trow.appendChild(td2);
@@ -69,7 +95,6 @@
             trow.appendChild(td6);
 
             tbody.appendChild(trow);
-
         }
 
         function AddAllItemsToTable(user1) {
@@ -96,6 +121,8 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
 
+        const db = getDatabase();
+
         function GetAllDataOnce() {
             const dbRef = ref(getDatabase());
             get(child(dbRef, `users`)).then((snapshot) => {
@@ -115,7 +142,6 @@
             });
         }
         window.onload = GetAllDataOnce;
-
 
         document.getElementById('Updating').onclick = function () {
             var userId = document.getElementById("USERID").value;
@@ -141,6 +167,8 @@
 
             return update(ref(db), updates);
         }
+
+
 
     </Script>
 

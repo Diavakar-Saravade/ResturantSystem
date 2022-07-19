@@ -1,0 +1,107 @@
+<html>
+
+<head>
+    <title>Resturant System</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+
+<body>
+
+
+    <div class="bg-img">
+        <div class="container">
+            <div class="topnav">
+                <a href="#">Home</a>
+                <a href="./All.html">Spice Factory</a>
+
+            </div>
+        </div>
+        <div class="center-details">
+            <p>Resturant Details System</p>
+            <button id="login" type="button" class="btn btn-danger" onclick="openForm()">Login</button>
+
+            <button id="Signup" type="button" class="btn btn-danger" onclick="SignupForm()">Sign up</button>
+
+        </div>
+    </div>
+    <div class="form-popup" id="myForm">
+        <form class="form-container">
+            <h1>Login</h1>
+
+            <label for="email"><b>Email</b></label>
+            <input type="text" id="email" placeholder="Enter Email" name="email" required>
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" id="psw" placeholder="Enter Password" name="psw" required>
+
+            <a href="./All.html"><button type="button" id="popuplogin" name="login" class="btn">Login</button></a>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+    </div>
+
+    <div class="form-popup" id="Signup1">
+        <form class="form-container">
+            <h1>Signup</h1>
+
+            <label for="email"><b>Email</b></label>
+            <input type="text" id="SignupEmail" placeholder="Enter Email" name="email" required>
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" id="SignupPassword" placeholder="Enter Password" name="psw" required>
+
+            <label for="psw"><b>Repeat password</b></label>
+            <input type="password" id="RepeatSignPsw" placeholder="Repeat password" name="psw" required>
+            <button type="button" id="SignupBtn" class="btn">signup</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+    </div>
+    <script src="Function.js"></script>
+
+    <script>
+
+        // var objConnection = new ActiveXObject("ADODB.Connection");
+
+        // var strConn = "driver={sql server};server=ENCDXPHDLT0511;database=restaurant;uid=root;password=root@3231";
+        // objConnection.Open(strConn);
+        // var rs = new ActiveXObject("ADODB.Recordset");
+        // var strQuery = "SELECT * FROM  Person.Address";
+        // rs.Open(strQuery, objConnection);
+        // rs.MoveFirst();
+        // while (!rs.EOF) {
+        //     document.write(rs.fields(0) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+        //     document.write(rs.fields(1) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+        //     document.write(rs.fields(2) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    ");
+        //     document.write(rs.fields(3) + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    ");
+        //     document.write(rs.fields(4) + "<br/>");
+        //     rs.movenext();
+        // }
+
+        var connection = new ActiveXObject("ADODB.Connection");
+
+        var connectionstring = "Data Source=<server>;Initial Catalog=<catalog>;User ID=<user>;Password=<password>;Provider=SQLOLEDB";
+
+        connection.Open(connectionstring);
+        var rs = new ActiveXObject("ADODB.Recordset");
+
+        rs.Open("SELECT * FROM table", connection);
+        rs.MoveFirst
+        while (!rs.eof) {
+            document.write(rs.fields(1));
+            rs.movenext;
+        }
+
+        rs.close;
+        connection.close;
+
+    </script>
+
+
+</body>
+
+</html>
